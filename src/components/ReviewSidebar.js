@@ -79,7 +79,7 @@ const ReviewSidebar = ({ isOpen, onClose, selectedCards = [], skipQuantities = {
                   <span className="text-gray-300">Number of Skips:</span>
                   <span className="font-semibold">{totalSkips}</span>
                 </div>
-                <div className="flex justify-between text-lg font-bold text-[#0037C1] border-t border-neutral-600 pt-2 mt-2">
+                <div className="flex justify-between text-lg font-bold text-[#2563EB] border-t border-neutral-600 pt-2 mt-2">
                   <span>Total Amount:</span>
                   <span>£{totalAmount}</span>
                 </div>
@@ -99,7 +99,7 @@ const ReviewSidebar = ({ isOpen, onClose, selectedCards = [], skipQuantities = {
                       </div>
                       <div className="text-right">
                         <div className="text-sm text-gray-300">Qty: {skip.quantity}</div>
-                        <div className="font-semibold text-[#0037C1]">£{skip.totalPrice}</div>
+                        <div className="font-semibold text-[#2563EB]">£{skip.totalPrice}</div>
                       </div>
                     </div>
                     
@@ -122,7 +122,7 @@ const ReviewSidebar = ({ isOpen, onClose, selectedCards = [], skipQuantities = {
           <div className="p-4 border-t border-neutral-700">
             <button
               onClick={handleContinue}
-              className="w-full bg-[#0037C1] text-white py-3 px-4 rounded-lg font-semibold hover:bg-[#0037C1]/90 transition-colors"
+              className="w-full bg-[#2563EB] text-white py-3 px-4 rounded-lg font-semibold hover:bg-[#2563EB]/90 transition-colors"
             >
               Continue
             </button>

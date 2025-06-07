@@ -19,8 +19,8 @@ const SkipCard = ({
         transition-all
         overflow-hidden
         ${isSelected 
-          ? 'border-[#0037C1] ring-2 ring-[#0037C1]/50' 
-          : 'border-transparent hover:border-[#0037C1]/60'
+          ? 'border-[#2563EB] ring-2 ring-[#2563EB]/50' 
+          : 'border-transparent hover:border-[#2563EB]/60'
         }
       `}
       onClick={() => onCardSelection(skip.id)}
@@ -36,7 +36,7 @@ const SkipCard = ({
 
         {/* Selection Indicator */}
         {isSelected && (
-          <div className="absolute top-2 right-2 bg-[#0037C1] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
+          <div className="absolute top-2 right-2 bg-[#2563EB] text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold">
             ✓
           </div>
         )}
@@ -107,26 +107,26 @@ const SkipCard = ({
           <div className="text-lg font-bold text-white mb-1">{skip.size} Yard</div>
           
           {/* Hire Period */}
-          <div className="text-lg font-bold text-white mb-1">Hire Period {skip.hire_period_days} days</div>
+          <div className="text-lg text-white mb-1">Hire Period {skip.hire_period_days} days</div>
           
           {/* Price and Quantity Selector - Inline */}
           <div className="flex items-center justify-between">
-            <div className="text-xl font-bold text-[#0037C1]">£{calculateTotalPrice(skip)}</div>
+            <div className="text-xl font-bold text-[#2563EB]">£{calculateTotalPrice(skip)}</div>
             
-            <div className="flex items-center bg-neutral-700 rounded text-sm">
+            <div className="flex items-center bg-gray-100 rounded text-sm">
               <button
                 onClick={(e) => onDecreaseQuantity(skip.id, e)}
-                className="px-1.5 py-0.5 text-white hover:bg-neutral-600 rounded-l transition-colors"
+                className="px-1.5 py-0.5 text-[#2563EB] hover:bg-gray-200 rounded-l transition-colors font-medium"
                 disabled={quantity === 0}
               >
                 -
               </button>
-              <span className="px-1.5 py-0.5 text-white bg-neutral-800 min-w-[1.5rem] text-center">
+              <span className="px-1.5 py-0.5 text-[#2563EB] bg-gray-100 min-w-[1.5rem] text-center font-medium">
                 {quantity}
               </span>
               <button
                 onClick={(e) => onIncreaseQuantity(skip.id, e)}
-                className="px-1.5 py-0.5 text-white hover:bg-neutral-600 rounded-r transition-colors"
+                className="px-1.5 py-0.5 text-[#2563EB] hover:bg-gray-200 rounded-r transition-colors font-medium"
               >
                 +
               </button>

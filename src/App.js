@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ProcessPath from './components/ProcessPath';
-import SkipSelector from './components/SkipSelector';
+import SkipSelector from './pages/SkipSelector';
 import ReviewSidebar from './components/ReviewSidebar';
 import MobileCartButton from './components/MobileCartButton';
 import './App.css';

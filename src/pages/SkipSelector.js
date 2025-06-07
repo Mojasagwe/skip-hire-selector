@@ -1,17 +1,18 @@
 import React, { useState, useMemo } from 'react';
 import { skipData } from '../data/skipData';
-import SkipFilter from './SkipFilter';
-import SkipCard from './SkipCard';
+import SkipFilter from '../components/SkipFilter';
+import SkipCard from '../components/SkipCard';
 
 const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkipQuantities }) => {
   const [filters, setFilters] = useState({
     allowedOnRoad: null, // null = all, true = road allowed, false = road not allowed
-    allowsHeavyWaste: null // null = all, true = heavy waste allowed, false = heavy waste not allowed
+    allowsHeavyWaste: null, // null = all, true = heavy waste allowed, false = heavy waste not allowed
+    priceSort: null // null = default, 'lowToHigh' = lowest to highest, 'highToLow' = highest to lowest
   });
 
-  // Filter the skip data based on current filters
+  // Filter and sort the skip data based on current filters
   const filteredSkips = useMemo(() => {
-    return skipData.filter(skip => {
+    let result = skipData.filter(skip => {
       // Filter by allowed_on_road
       if (filters.allowedOnRoad !== null && skip.allowed_on_road !== filters.allowedOnRoad) {
         return false;
@@ -24,6 +25,23 @@ const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkip
       
       return true;
     });
+
+    // Sort by price if sorting is selected
+    if (filters.priceSort === 'lowToHigh') {
+      result.sort((a, b) => {
+        const priceA = Math.round(a.price_before_vat * (1 + a.vat/100));
+        const priceB = Math.round(b.price_before_vat * (1 + b.vat/100));
+        return priceA - priceB;
+      });
+    } else if (filters.priceSort === 'highToLow') {
+      result.sort((a, b) => {
+        const priceA = Math.round(a.price_before_vat * (1 + a.vat/100));
+        const priceB = Math.round(b.price_before_vat * (1 + b.vat/100));
+        return priceB - priceA;
+      });
+    }
+
+    return result;
   }, [filters]);
 
   const handleCardSelection = (cardId) => {
@@ -94,7 +112,8 @@ const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkip
   const clearFilters = () => {
     setFilters({
       allowedOnRoad: null,
-      allowsHeavyWaste: null
+      allowsHeavyWaste: null,
+      priceSort: null
     });
   };
 
@@ -136,7 +155,7 @@ const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkip
             <p className="text-gray-400 text-lg">No skips match your current filters.</p>
             <button 
               onClick={clearFilters}
-              className="mt-4 bg-[#0037C1] text-white px-6 py-2 rounded hover:bg-[#0037C1]/80 transition-colors"
+              className="mt-4 bg-[#2563EB] text-white px-6 py-2 rounded hover:bg-[#2563EB]/80 transition-colors"
             >
               Clear Filters
             </button>

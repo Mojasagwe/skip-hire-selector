@@ -6,7 +6,7 @@ const ReviewButton = ({ selectedCount, onClick }) => {
   return (
     <button 
       onClick={onClick}
-      className="hidden md:flex items-center bg-[#0037C1] hover:bg-[#0037C1]/90 text-white px-4 py-2 rounded-md ml-4 transition-colors"
+      className="hidden md:flex items-center bg-[#2563EB] hover:bg-[#2563EB]/90 text-white px-4 py-2 rounded-md ml-4 transition-colors"
     >
       <svg 
         xmlns="http://www.w3.org/2000/svg" 

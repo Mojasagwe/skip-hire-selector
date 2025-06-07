@@ -82,7 +82,7 @@ const ProcessPath = ({ selectedCards = [], skipQuantities = {}, onReviewClick })
       <div className="w-full mx-auto">
         <div className="flex items-center justify-between">
           {/* Progress Steps */}
-          <div className="flex items-center justify-center space-x-1 md:space-x-3 overflow-x-auto scrollbar-hide px-3 flex-1">
+          <div className="flex items-center justify-center space-x-1 md:space-x-3 overflow-x-auto scrollbar-hide px-[10%] flex-1">
           {steps.map((step, index) => (
             <React.Fragment key={step.id}>
               {/* Step Button */}
@@ -93,7 +93,7 @@ const ProcessPath = ({ selectedCards = [], skipQuantities = {}, onReviewClick })
                     : 'cursor-not-allowed opacity-50'
                 } ${
                   currentStep >= step.id 
-                    ? 'text-[#0037C1] hover:text-[#0037C1]' 
+                    ? 'text-[#2563EB] hover:text-[#2563EB]' 
                     : step.id <= maxAllowedStep
                     ? 'text-gray-500 hover:text-gray-400'
                     : 'text-gray-600'
@@ -103,7 +103,7 @@ const ProcessPath = ({ selectedCards = [], skipQuantities = {}, onReviewClick })
               >
                 <div className={`p-1 md:p-1.5 rounded-full ${
                   currentStep >= step.id 
-                    ? 'bg-[#0037C1]' 
+                    ? 'bg-[#2563EB]' 
                     : step.id <= maxAllowedStep 
                     ? 'bg-gray-600' 
                     : 'bg-gray-700'
@@ -120,7 +120,7 @@ const ProcessPath = ({ selectedCards = [], skipQuantities = {}, onReviewClick })
               {/* Separator Line */}
               {index < steps.length - 1 && (
                 <div className={`w-6 md:w-12 h-px ${
-                  currentStep > step.id ? 'bg-[#0037C1]' : 'bg-[#2A2A2A]'
+                  currentStep > step.id ? 'bg-[#2563EB]' : 'bg-[#2A2A2A]'
                 } flex-shrink-0 hidden xl:block`}></div>
               )}
             </React.Fragment>

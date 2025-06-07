@@ -8,7 +8,7 @@ const SkipFilter = ({
   totalCount 
 }) => {
   return (
-    <div className="mb-6 bg-neutral-800 p-4 rounded-lg">
+    <div className="mb-6 bg-neutral-900 p-4 rounded-lg">
       <div className="flex flex-wrap items-center gap-4">
         <span className="text-white font-semibold">Filters:</span>
         
@@ -40,10 +40,24 @@ const SkipFilter = ({
           </select>
         </div>
 
+        {/* Price Sorting Filter */}
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-gray-300">Sort by Price:</label>
+          <select 
+            value={filters.priceSort || 'none'}
+            onChange={(e) => onFilterChange('priceSort', e.target.value === 'none' ? null : e.target.value)}
+            className="bg-neutral-700 text-white px-3 py-1 rounded text-sm"
+          >
+            <option value="none">Default</option>
+            <option value="lowToHigh">Lowest to Highest</option>
+            <option value="highToLow">Highest to Lowest</option>
+          </select>
+        </div>
+
         {/* Clear Filters */}
         <button 
           onClick={onClearFilters}
-          className="bg-[#0037C1] text-white px-3 py-1 rounded text-sm hover:bg-[#0037C1]/80 transition-colors"
+          className="bg-[#2563EB] text-white px-3 py-1 rounded text-sm hover:bg-[#2563EB]/80 transition-colors"
         >
           Clear Filters
         </button>

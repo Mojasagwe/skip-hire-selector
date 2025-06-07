@@ -6,7 +6,7 @@ const MobileCartButton = ({ selectedCount, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-[#0037C1] hover:bg-[#0037C1]/90 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 z-30"
+      className="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-[#2563EB] hover:bg-[#2563EB]/90 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 z-30"
     >
       <div className="relative">
         <svg 
