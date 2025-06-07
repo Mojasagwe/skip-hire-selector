@@ -40,6 +40,21 @@ const SkipFilter = ({
           </select>
         </div>
 
+        {/* Size Filter */}
+        <div className="flex items-center gap-2">
+          <label className="text-sm text-gray-300">Size:</label>
+          <select 
+            value={filters.sizeCategory || 'all'}
+            onChange={(e) => onFilterChange('sizeCategory', e.target.value === 'all' ? null : e.target.value)}
+            className="bg-neutral-700 text-white px-3 py-1 rounded text-sm"
+          >
+            <option value="all">All Sizes</option>
+            <option value="small">Small (4-8 yards)</option>
+            <option value="medium">Medium (10-16 yards)</option>
+            <option value="large">Large (20+ yards)</option>
+          </select>
+        </div>
+
         {/* Price Sorting Filter */}
         <div className="flex items-center gap-2">
           <label className="text-sm text-gray-300">Sort by Price:</label>

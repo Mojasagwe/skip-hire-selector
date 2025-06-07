@@ -7,6 +7,7 @@ const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkip
   const [filters, setFilters] = useState({
     allowedOnRoad: null, // null = all, true = road allowed, false = road not allowed
     allowsHeavyWaste: null, // null = all, true = heavy waste allowed, false = heavy waste not allowed
+    sizeCategory: null, // null = all, 'small' = 4-8 yards, 'medium' = 10-16 yards, 'large' = 20+ yards
     priceSort: null // null = default, 'lowToHigh' = lowest to highest, 'highToLow' = highest to lowest
   });
 
@@ -21,6 +22,19 @@ const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkip
       // Filter by allows_heavy_waste
       if (filters.allowsHeavyWaste !== null && skip.allows_heavy_waste !== filters.allowsHeavyWaste) {
         return false;
+      }
+      
+      // Filter by size category
+      if (filters.sizeCategory !== null) {
+        if (filters.sizeCategory === 'small' && (skip.size < 4 || skip.size > 8)) {
+          return false;
+        }
+        if (filters.sizeCategory === 'medium' && (skip.size < 10 || skip.size > 16)) {
+          return false;
+        }
+        if (filters.sizeCategory === 'large' && skip.size < 20) {
+          return false;
+        }
       }
       
       return true;
@@ -113,6 +127,7 @@ const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkip
     setFilters({
       allowedOnRoad: null,
       allowsHeavyWaste: null,
+      sizeCategory: null,
       priceSort: null
     });
   };
