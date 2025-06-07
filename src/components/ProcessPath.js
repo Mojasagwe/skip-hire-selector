@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-const ProcessPath = () => {
+const ProcessPath = ({ selectedCards = [], skipQuantities = {}, onReviewClick }) => {
   const [currentStep, setCurrentStep] = useState(1);
+
+
 
   const steps = [
     {
@@ -76,8 +78,9 @@ const ProcessPath = () => {
   return (
     <nav className="bg-neutral-900 p-2 md:p-4 md:sticky md:top-0 md:z-50">
       <div className="w-full mx-auto">
-        {/* Progress Steps */}
-        <div className="flex items-center justify-center space-x-1 md:space-x-3 overflow-x-auto scrollbar-hide px-3">
+        <div className="flex items-center justify-between">
+          {/* Progress Steps */}
+          <div className="flex items-center justify-center space-x-1 md:space-x-3 overflow-x-auto scrollbar-hide px-3 flex-1">
           {steps.map((step, index) => (
             <React.Fragment key={step.id}>
               {/* Step Button */}
@@ -109,6 +112,20 @@ const ProcessPath = () => {
               )}
             </React.Fragment>
           ))}
+          </div>
+
+          {/* Review Button */}
+          {selectedCards.length > 0 && (
+            <button 
+              onClick={onReviewClick}
+              className="hidden md:flex items-center bg-[#0037C1] hover:bg-[#0037C1]/90 text-white px-4 py-2 rounded-md ml-4 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                <path d="M9 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-4m-5 0v-5a3 3 0 0 1 6 0v5m-6 0h6"></path>
+              </svg>
+              <span className="text-sm font-medium">Review ({selectedCards.length})</span>
+            </button>
+          )}
         </div>
       </div>
     </nav>

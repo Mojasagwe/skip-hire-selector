@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from 'react';
 
-const SkipSelector = () => {
-  const [selectedCards, setSelectedCards] = useState([]);
-  const [skipQuantities, setSkipQuantities] = useState({});
+const SkipSelector = ({ selectedCards, setSelectedCards, skipQuantities, setSkipQuantities }) => {
   const [filters, setFilters] = useState({
     allowedOnRoad: null, // null = all, true = road allowed, false = road not allowed
     allowsHeavyWaste: null // null = all, true = heavy waste allowed, false = heavy waste not allowed
@@ -174,15 +172,33 @@ const SkipSelector = () => {
   }, [filters]);
 
   const handleCardSelection = (cardId) => {
-    setSelectedCards(prev => 
-      prev.includes(cardId) 
-        ? prev.filter(id => id !== cardId)
-        : [...prev, cardId]
-    );
+    setSelectedCards(prev => {
+      if (prev.includes(cardId)) {
+        // Deselecting: remove from selected cards and set quantity to 0
+        setSkipQuantities(prevQuantities => ({
+          ...prevQuantities,
+          [cardId]: 0
+        }));
+        return prev.filter(id => id !== cardId);
+      } else {
+        // Selecting: add to selected cards and set quantity to 1
+        setSkipQuantities(prevQuantities => ({
+          ...prevQuantities,
+          [cardId]: 1
+        }));
+        return [...prev, cardId];
+      }
+    });
   };
 
   const increaseQuantity = (skipId, event) => {
     event.stopPropagation(); // Prevent card selection
+    
+    // If card is not selected, select it first
+    if (!selectedCards.includes(skipId)) {
+      setSelectedCards(prev => [...prev, skipId]);
+    }
+    
     setSkipQuantities(prev => ({
       ...prev,
       [skipId]: (prev[skipId] || 0) + 1
@@ -191,10 +207,22 @@ const SkipSelector = () => {
 
   const decreaseQuantity = (skipId, event) => {
     event.stopPropagation(); // Prevent card selection
-    setSkipQuantities(prev => ({
-      ...prev,
-      [skipId]: Math.max(0, (prev[skipId] || 0) - 1)
-    }));
+    const currentQuantity = skipQuantities[skipId] || 0;
+    
+    if (currentQuantity <= 1) {
+      // If quantity is 1 or less, deselect the card
+      setSelectedCards(prev => prev.filter(id => id !== skipId));
+      setSkipQuantities(prev => ({
+        ...prev,
+        [skipId]: 0
+      }));
+    } else {
+      // Otherwise just decrease quantity
+      setSkipQuantities(prev => ({
+        ...prev,
+        [skipId]: currentQuantity - 1
+      }));
+    }
   };
 
   const getQuantity = (skipId) => {
@@ -283,21 +311,28 @@ const SkipSelector = () => {
                 border-2 
                 rounded-lg 
                 cursor-pointer 
-                transition-colors
+                transition-all
                 overflow-hidden
                 ${selectedCards.includes(skip.id) 
                   ? 'border-[#0037C1] ring-2 ring-[#0037C1]/50' 
-                  : 'border-gray-600 hover:border-gray-500'
+                  : 'border-transparent hover:border-[#0037C1]/60'
                 }
               `}
               onClick={() => handleCardSelection(skip.id)}
             >
               {/* Top Section - Skip Image (60%) */}
-              <div className="h-3/5 bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative">
-                {/* Placeholder for skip image */}
-                <div className="text-6xl text-gray-500">
-                  🗑️
-                </div>
+              <div className="h-3/5 relative overflow-hidden">
+                {/* Skip Image */}
+                <img 
+                  src={skip.size >= 20 
+                    ? "https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/20-yarder-skip.jpg"
+                    : skip.size >= 10
+                    ? "https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/5-yarder-skip.jpg"
+                    : "https://yozbrydxdlcxghkphhtq.supabase.co/storage/v1/object/public/skips/skip-sizes/4-yarder-skip.jpg"
+                  }
+                  alt={`${skip.size} Yard Skip`} 
+                  className="w-full h-full object-cover" 
+                />
 
                 {/* Selection Indicator */}
                 {selectedCards.includes(skip.id) && (
@@ -308,7 +343,7 @@ const SkipSelector = () => {
               </div>
 
               {/* Bottom Section - Skip Details (40%) */}
-              <div className="h-2/5 p-3 pb-2 flex flex-col relative">
+              <div className="h-2/5 p-3 pb-2 flex flex-col relative bg-[#292929]">
                 {/* Warning Icons - Top Right of Details Section */}
                 <div className="absolute top-2 right-2 flex gap-2">
                   {/* Road Placement Warning */}
