@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 const ProcessPath = ({ selectedCards = [], skipQuantities = {}, onReviewClick }) => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(3); // Set to "Select Skip" step
+  const maxAllowedStep = 3; // Only allow up to "Select Skip" for now
 
 
 
@@ -85,15 +86,26 @@ const ProcessPath = ({ selectedCards = [], skipQuantities = {}, onReviewClick })
             <React.Fragment key={step.id}>
               {/* Step Button */}
               <button 
-                className={`flex items-center whitespace-nowrap transition-colors cursor-pointer flex-shrink-0 ${
+                className={`flex items-center whitespace-nowrap transition-colors flex-shrink-0 ${
+                  step.id <= maxAllowedStep 
+                    ? 'cursor-pointer' 
+                    : 'cursor-not-allowed opacity-50'
+                } ${
                   currentStep >= step.id 
                     ? 'text-[#0037C1] hover:text-[#0037C1]' 
-                    : 'text-gray-500 hover:text-gray-400'
+                    : step.id <= maxAllowedStep
+                    ? 'text-gray-500 hover:text-gray-400'
+                    : 'text-gray-600'
                 }`}
-                onClick={() => setCurrentStep(step.id)}
+                onClick={() => step.id <= maxAllowedStep && setCurrentStep(step.id)}
+                disabled={step.id > maxAllowedStep}
               >
                 <div className={`p-1 md:p-1.5 rounded-full ${
-                  currentStep >= step.id ? 'bg-[#0037C1]' : 'bg-gray-600'
+                  currentStep >= step.id 
+                    ? 'bg-[#0037C1]' 
+                    : step.id <= maxAllowedStep 
+                    ? 'bg-gray-600' 
+                    : 'bg-gray-700'
                 }`}>
                   <div className="text-white">
                     {step.icon}
