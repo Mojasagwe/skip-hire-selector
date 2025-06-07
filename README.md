@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Skip Hire Selector
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application for a skip hire company's waste management service. This project provides a user-friendly interface for customers to select appropriate skip sizes and navigate through the booking process.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Responsive Process Path** - Visual step-by-step journey for skip hire booking
+- **Mobile-First Design** - Optimized for all screen sizes from mobile to desktop
+- **Modern UI** - Built with Tailwind CSS for clean, professional styling
+- **Interactive Progress Tracking** - Clear visual feedback on booking progress
 
-### `npm start`
+## 📱 Components
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### ProcessPath Component
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The main navigation component that displays the 6-step booking process:
 
-### `npm test`
+1. **Postcode** - Location verification
+2. **Waste Type** - Category selection  
+3. **Select Skip** - Size and capacity selection
+4. **Permit Check** - Legal compliance verification
+5. **Choose Date** - Delivery scheduling
+6. **Payment** - Secure checkout
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Responsive Features:
+- **Desktop**: Full step names with connecting lines
+- **Tablet**: Step names visible without connecting lines  
+- **Mobile**: Icon-only view for optimal space usage
 
-### `npm run build`
+### SkipSelector Component
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Main content area for the skip selection interface (currently placeholder).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠 Tech Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **React** - Frontend framework
+- **Tailwind CSS** - Utility-first CSS framework
+- **Lucide Icons** - Icon library for consistent iconography
 
-### `npm run eject`
+## 🎨 Design
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **Dark Theme** - Professional appearance with `bg-neutral-900`
+- **Brand Colors** - Primary blue `#0037C1` for active states
+- **Typography** - Responsive text sizing and spacing
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 📦 Installation
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+# Clone the repository
+git clone https://github.com/Mojasagwe/skip-hire-selector.git
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+# Navigate to project directory
+cd skip-hire-selector
 
-## Learn More
+# Install dependencies
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Start development server
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔧 Development
 
-### Code Splitting
+The project uses Create React App for development and build processes.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Available Scripts
 
-### Analyzing the Bundle Size
+- `npm start` - Runs the app in development mode
+- `npm build` - Builds the app for production
+- `npm test` - Launches the test runner
+- `npm eject` - Ejects from Create React App (irreversible)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 📐 Responsive Breakpoints
 
-### Making a Progressive Web App
+- **Mobile**: `< 640px` - Icon-only ProcessPath
+- **Tablet**: `640px - 1279px` - Icons + text, no connecting lines
+- **Desktop**: `≥ 1280px` - Full experience with connecting lines
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🚀 Deployment
 
-### Advanced Configuration
+This project can be deployed to any static hosting service:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- **Netlify**
+- **Vercel** 
+- **GitHub Pages**
+- **CodeSandbox**
 
-### Deployment
+## 🔮 Future Enhancements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Add skip size selection interface
+- Implement form validation
+- Add booking confirmation flow
+- Integrate payment processing
+- Add location-based services
 
-### `npm run build` fails to minify
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the MIT License.
