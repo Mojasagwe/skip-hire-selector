@@ -11,7 +11,7 @@ function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="App relative">
+    <div className="App">
       <ProcessPath 
         selectedCards={selectedCards}
         skipQuantities={skipQuantities}

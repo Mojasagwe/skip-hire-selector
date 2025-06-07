@@ -49,10 +49,10 @@ const ReviewSidebar = ({ isOpen, onClose, selectedCards = [], skipQuantities = {
         onClick={onClose}
       />
       
-      {/* Sidebar - Right on desktop/tablet, Full screen overlay on mobile */}
+      {/* Sidebar - Right on desktop/tablet, Left on mobile */}
       <div className={`fixed top-0 h-full bg-neutral-800 text-white z-50 transform transition-transform duration-300
-        ${isOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-full'}
-        right-0 w-full md:w-96 max-w-[85vw] md:max-w-none
+        ${isOpen ? 'translate-x-0' : 'md:translate-x-full -translate-x-full'}
+        left-0 w-80 max-w-[85vw] md:left-auto md:right-0 md:w-96
       `}>
         <div className="flex flex-col h-full">
           {/* Header */}
