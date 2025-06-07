@@ -1,98 +1,15 @@
 import React, { useMemo } from 'react';
+import { skipData, calculateTotalPrice, findSkipById } from '../data/skipData';
 
 const ReviewSidebar = ({ isOpen, onClose, selectedCards = [], skipQuantities = {} }) => {
-  // Skip data (same as in other components)
-  const skipData = [
-    {
-      "id": 17933,
-      "size": 4,
-      "hire_period_days": 14,
-      "price_before_vat": 278,
-      "vat": 20,
-      "allowed_on_road": true,
-      "allows_heavy_waste": true
-    },
-    {
-      "id": 17934,
-      "size": 6,
-      "hire_period_days": 14,
-      "price_before_vat": 305,
-      "vat": 20,
-      "allowed_on_road": true,
-      "allows_heavy_waste": true
-    },
-    {
-      "id": 17935,
-      "size": 8,
-      "hire_period_days": 14,
-      "price_before_vat": 375,
-      "vat": 20,
-      "allowed_on_road": true,
-      "allows_heavy_waste": true
-    },
-    {
-      "id": 17936,
-      "size": 10,
-      "hire_period_days": 14,
-      "price_before_vat": 400,
-      "vat": 20,
-      "allowed_on_road": false,
-      "allows_heavy_waste": false
-    },
-    {
-      "id": 17937,
-      "size": 12,
-      "hire_period_days": 14,
-      "price_before_vat": 439,
-      "vat": 20,
-      "allowed_on_road": false,
-      "allows_heavy_waste": false
-    },
-    {
-      "id": 17938,
-      "size": 14,
-      "hire_period_days": 14,
-      "price_before_vat": 470,
-      "vat": 20,
-      "allowed_on_road": false,
-      "allows_heavy_waste": false
-    },
-    {
-      "id": 17939,
-      "size": 16,
-      "hire_period_days": 14,
-      "price_before_vat": 496,
-      "vat": 20,
-      "allowed_on_road": false,
-      "allows_heavy_waste": false
-    },
-    {
-      "id": 15124,
-      "size": 20,
-      "hire_period_days": 14,
-      "price_before_vat": 992,
-      "vat": 20,
-      "allowed_on_road": false,
-      "allows_heavy_waste": true
-    },
-    {
-      "id": 15125,
-      "size": 40,
-      "hire_period_days": 14,
-      "price_before_vat": 992,
-      "vat": 20,
-      "allowed_on_road": false,
-      "allows_heavy_waste": false
-    }
-  ];
 
   // Calculate total amount
   const totalAmount = useMemo(() => {
     return selectedCards.reduce((total, skipId) => {
-      const skip = skipData.find(s => s.id === skipId);
+      const skip = findSkipById(skipId);
       if (skip) {
         const quantity = skipQuantities[skipId] || 0;
-        const skipTotal = Math.round(skip.price_before_vat * (1 + skip.vat/100));
+        const skipTotal = calculateTotalPrice(skip);
         return total + (skipTotal * Math.max(1, quantity));
       }
       return total;
@@ -102,12 +19,12 @@ const ReviewSidebar = ({ isOpen, onClose, selectedCards = [], skipQuantities = {
   // Get selected skip details
   const selectedSkipDetails = useMemo(() => {
     return selectedCards.map(skipId => {
-      const skip = skipData.find(s => s.id === skipId);
+      const skip = findSkipById(skipId);
       const quantity = skipQuantities[skipId] || 1;
       return {
         ...skip,
         quantity,
-        totalPrice: Math.round(skip.price_before_vat * (1 + skip.vat/100)) * quantity
+        totalPrice: calculateTotalPrice(skip) * quantity
       };
     });
   }, [selectedCards, skipQuantities]);
