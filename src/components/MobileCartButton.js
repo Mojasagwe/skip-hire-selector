@@ -4,10 +4,13 @@ const MobileCartButton = ({ selectedCount, onClick }) => {
   const [position, setPosition] = useState({ x: window.innerWidth - 80, y: 16 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [initialTouch, setInitialTouch] = useState({ x: 0, y: 0 });
+  const [hasMoved, setHasMoved] = useState(false);
   const buttonRef = useRef(null);
 
   const handleStart = (clientX, clientY) => {
-    setIsDragging(true);
+    setInitialTouch({ x: clientX, y: clientY });
+    setHasMoved(false);
     setDragStart({
       x: clientX - position.x,
       y: clientY - position.y
@@ -15,6 +18,16 @@ const MobileCartButton = ({ selectedCount, onClick }) => {
   };
 
   const handleMove = (clientX, clientY) => {
+    // Check if we've moved enough to consider it a drag (5px threshold)
+    const moveDistance = Math.sqrt(
+      Math.pow(clientX - initialTouch.x, 2) + Math.pow(clientY - initialTouch.y, 2)
+    );
+    
+    if (moveDistance > 5 && !isDragging) {
+      setIsDragging(true);
+      setHasMoved(true);
+    }
+    
     if (!isDragging) return;
     
     const newX = clientX - dragStart.x;
@@ -33,6 +46,8 @@ const MobileCartButton = ({ selectedCount, onClick }) => {
 
   const handleEnd = () => {
     setIsDragging(false);
+    // Reset after a small delay to allow click to process
+    setTimeout(() => setHasMoved(false), 100);
   };
 
   // Mouse events
@@ -69,7 +84,7 @@ const MobileCartButton = ({ selectedCount, onClick }) => {
 
   // Handle click (only if not dragging)
   const handleClick = (e) => {
-    if (!isDragging) {
+    if (!hasMoved) {
       onClick();
     }
   };
