@@ -5,9 +5,13 @@ A React application for a skip hire company's waste management service. This pro
 ## 🚀 Features
 
 - **Responsive Process Path** - Visual step-by-step journey for skip hire booking
+- **Interactive Skip Cards** - Visual skip selection with enhanced image display and quantity controls
+- **Advanced Filtering** - Filter skips by road placement and heavy waste allowance
+- **Multi-Selection Support** - Select multiple skip types with quantity controls
+- **Warning System** - Visual indicators for placement and waste restrictions
 - **Mobile-First Design** - Optimized for all screen sizes from mobile to desktop
 - **Modern UI** - Built with Tailwind CSS for clean, professional styling
-- **Interactive Progress Tracking** - Clear visual feedback on booking progress
+- **Sticky Navigation** - ProcessPath remains visible on desktop/tablet during scroll
 
 ## 📱 Components
 
@@ -23,13 +27,36 @@ The main navigation component that displays the 6-step booking process:
 6. **Payment** - Secure checkout
 
 #### Responsive Features:
-- **Desktop**: Full step names with connecting lines
-- **Tablet**: Step names visible without connecting lines  
-- **Mobile**: Icon-only view for optimal space usage
+- **Desktop**: Full step names with connecting lines, sticky navigation
+- **Tablet**: Step names visible without connecting lines, sticky navigation
+- **Mobile**: Icon-only view for optimal space usage, scrolls away naturally
 
 ### SkipSelector Component
 
-Main content area for the skip selection interface (currently placeholder).
+Comprehensive skip selection interface with advanced features:
+
+#### Card Layout:
+- **60/40 Split** - Enhanced image area (60%) with skip details (40%)
+- **Visual Skip Display** - Large skip icons with clear size identification
+- **Inline Controls** - Price and quantity selector on the same line
+- **Selection Feedback** - Visual indicators for selected skips
+
+#### Filtering System:
+- **Road Placement Filter** - Show only skips allowed on public roads
+- **Heavy Waste Filter** - Filter by waste type compatibility
+- **Dynamic Results** - Real-time filtering with result counts
+- **Clear Filters** - Easy reset functionality
+
+#### Warning Indicators:
+- **Yellow Triangle** - Private land only (road placement not allowed)
+- **Red Triangle** - Light waste only (heavy waste not allowed)
+- **Hover Tooltips** - Detailed restriction explanations
+
+#### Interactive Features:
+- **Multi-Selection** - Choose multiple skip types simultaneously
+- **Quantity Controls** - Adjust quantities with +/- buttons
+- **Visual Selection** - Blue border and checkmark for selected items
+- **Price Calculation** - Automatic VAT inclusion in displayed prices
 
 ## 🛠 Tech Stack
 
@@ -72,9 +99,9 @@ The project uses Create React App for development and build processes.
 
 ## 📐 Responsive Breakpoints
 
-- **Mobile**: `< 640px` - Icon-only ProcessPath
-- **Tablet**: `640px - 1279px` - Icons + text, no connecting lines
-- **Desktop**: `≥ 1280px` - Full experience with connecting lines
+- **Mobile**: `< 640px` - Icon-only ProcessPath, 1-column skip grid
+- **Tablet**: `640px - 1279px` - Icons + text, 2-column skip grid, sticky ProcessPath
+- **Desktop**: `≥ 1280px` - Full experience with connecting lines, 4-column skip grid, sticky ProcessPath
 
 ## 🚀 Deployment
 
@@ -87,11 +114,14 @@ This project can be deployed to any static hosting service:
 
 ## 🔮 Future Enhancements
 
-- Add skip size selection interface
-- Implement form validation
-- Add booking confirmation flow
+- Implement postcode validation and area checking
+- Add real skip images to replace placeholder icons
+- Implement form validation for booking flow
+- Add booking confirmation and order summary
 - Integrate payment processing
-- Add location-based services
+- Add location-based pricing and availability
+- Implement delivery date selection
+- Add user accounts and order history
 
 ## 🤝 Contributing
 
