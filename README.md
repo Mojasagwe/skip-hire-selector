@@ -58,6 +58,24 @@ Comprehensive skip selection interface with advanced features:
 - **Visual Selection** - Blue border and checkmark for selected items
 - **Price Calculation** - Automatic VAT inclusion in displayed prices
 
+### MobileCartButton Component
+
+A mobile-optimized cart button that provides quick access to selected items:
+
+#### Features:
+- **Fixed Position** - Stays visible at bottom of screen on mobile devices
+- **Dynamic Badge** - Shows total number of selected skip items
+- **Responsive Design** - Only displays on mobile devices (< 640px)
+- **Smooth Animation** - Pulse effect on badge for visual feedback
+- **Total Quantity Display** - Shows cumulative quantity of all selected skips
+- **Cart Icon** - Intuitive shopping cart icon with item count
+
+#### Mobile UX Benefits:
+- **Persistent Access** - Cart always visible without scrolling
+- **Space Efficient** - Compact design doesn't interfere with main content
+- **Quick Navigation** - Easy access to cart/checkout on mobile devices
+- **Visual Feedback** - Badge updates immediately when items are added/removed
+
 ## 🛠 Tech Stack
 
 - **React** - Frontend framework
